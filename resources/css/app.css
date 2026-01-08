@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* bl_primary (Light/Brand Array) */
+  --bl-primary-50: 230 237 230;   /* #e6ede6 */
+  --bl-primary-100: 206 220 206;  /* #cedcce */
+  --bl-primary-200: 182 203 182;  /* #b6cbb6 */
+  --bl-primary-300: 158 186 159;  /* #9eba9f */
+  --bl-primary-400: 134 169 136;  /* #86a988 */
+  --bl-primary-500: 111 152 114;  /* #6f9872 */
+  --bl-primary-600: 88 135 92;    /* #58875c */
+  --bl-primary-700: 64 119 70;    /* #407746 */
+  --bl-primary-800: 39 103 48;    /* #276730 */
+  --bl-primary-900: 0 87 25;      /* #005719 */
+
+  /* ddPrimary (Dark Array) */
+  --dd-primary-50: 0 87 25;       /* #005719 (Your base start) */
+  --dd-primary-100: 0 75 20;      /* #004b14 */
+  --dd-primary-200: 0 62 16;      /* #003e10 */
+  --dd-primary-300: 0 51 11;      /* #00330b */
+  --dd-primary-400: 0 39 7;       /* #002707 */
+  --dd-primary-500: 0 28 4;       /* #001c04 */
+  --dd-primary-600: 0 18 2;       /* #001202 */
+  --dd-primary-700: 0 8 1;        /* #000801 */
+  --dd-primary-800: 0 3 0;        /* #000300 */
+  --dd-primary-900: 0 0 0;        /* #000000 */
+}
+
+@font-face {
+    font-family: 'Bornomala';
+    src: url('../fonts/Bornomala/Bornomala-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bornomala';
+    src: url('../fonts/Bornomala/Bornomala-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@layer components {
+    .bn-font {
+        font-family: 'Bornomala', Arial, sans-serif;
+    }
+}
