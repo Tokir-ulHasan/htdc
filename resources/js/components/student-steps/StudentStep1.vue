@@ -4,7 +4,7 @@
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Program <span class="text-red-500">*</span></label>
         <select 
-          class="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-red-500 focus:border-red-500"
+          class="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
           :class="formErrors.program ? 'border-red-500' : 'border-gray-300'"
           :value="formData.program"
           @change="handleProgramChange"
