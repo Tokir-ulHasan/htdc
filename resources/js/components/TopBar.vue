@@ -64,9 +64,12 @@ const displayedText = computed(() => {
 })
 
 function computePublicUrl(p) {
-  const parts = window.location.pathname.split('/');
-  const base = parts[1] ? `/${parts[1]}` : '';
-  return `${base}/public/${p}`;
+  if (!p) return '';
+  // remove any leading slashes
+  p = p.replace(/^\/+/,'');
+  // Serve assets from the web root (Laravel's public/ folder). Do NOT include 'public' in the URL.
+  // This makes the path absolute so it won't break on nested routes like /student/apply
+  return `/${p}`;
 }
 const handleTyping = () => {
   if (pause.value) return
@@ -136,7 +139,7 @@ onUnmounted(() => {
   background-color: transparent;
 }
 .topbar-bg-inner{
-background-image: radial-gradient(circle at center, rgb(0 87 67 / 83%) 0%, /* Start with a light, semi-transparent white in the center */ rgb(0 24 7 / 95%) 70%, /* Transition to the semi-transparent dark red */ rgb(0 24 7) 100% /* Hold the dark red color at the edges */);
+background-image: radial-gradient(circle at center, rgb(0 87 67 / 83%) 0%, /* Start with a light, semi-transparent white in the center */ rgb(0 24 7 / 95%) 70%, /* Transition to the semi-transpar[...]*/
 height: 100%;
 }
 
