@@ -64,8 +64,8 @@ const currentProgramImage = computed(() => {
 
 onMounted(async () => {
   try {
-    const parts = window.location.pathname.split('/');
-    const base = parts[1] ? `/${parts[1]}` : '';
+    const segments = window.location.pathname.split('/').filter(Boolean);
+    const base = segments[0] && segments[0].toLowerCase() === 'htdc' ? `/${segments[0]}` : '';
     const apiBase = `${base}/api`;
     
     const response = await fetch(`${apiBase}/programs`);

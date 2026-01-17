@@ -32,62 +32,22 @@
         
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Father's Occupation</label>
-          <select 
-            class="w-full border border-gray-300 rounded px-3 py-2"
-            :value="formData.fOccupation"
-            @change="e => onChange('fOccupation', e.target.value)"
-          >
-            <option value="">Select Occupation</option>
-            <option value="Engineer">Engineer</option>
-            <option value="Doctor">Doctor</option>
-            <option value="Banker">Banker</option>
-            <option value="Advocate">Advocate</option>
-            <option value="Farmer">Farmer</option>
-            <option value="Teacher">Teacher</option>
-            <option value="Professor">Professor</option>
-            <option value="Businessman">Businessman</option>
-            <option value="Entrepreneur">Entrepreneur</option>
-            <option value="Government Employee">Government Employee</option>
-            <option value="Private Job">Private Job</option>
-            <option value="Accountant">Accountant</option>
-            <option value="Shopkeeper">Shopkeeper</option>
-            <option value="Police Officer">Police Officer</option>
-            <option value="Army Personnel">Army Personnel</option>
-            <option value="Navy Personnel">Navy Personnel</option>
-            <option value="Air Force Personnel">Air Force Personnel</option>
-            <option value="Driver">Driver</option>
-            <option value="Electrician">Electrician</option>
-            <option value="Plumber">Plumber</option>
-            <option value="Mason">Mason</option>
-            <option value="Tailor">Tailor</option>
-            <option value="Carpenter">Carpenter</option>
-            <option value="Painter">Painter</option>
-            <option value="Day Laborer">Day Laborer</option>
-            <option value="Fisherman">Fisherman</option>
-            <option value="Mechanic">Mechanic</option>
-            <option value="IT Professional">IT Professional</option>
-            <option value="Software Engineer">Software Engineer</option>
-            <option value="Unemployed">Unemployed</option>
-            <option value="Retired">Retired</option>
-            <option value="Other">Other</option>
-          </select>
+          <CustomSelect
+            :model-value="formData.fOccupation"
+            :options="fatherOccupationOptions"
+            :placeholder="'Select Occupation'"
+            @update:modelValue="v => onChange('fOccupation', v)"
+          />
         </div>
         
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Father's Qualification</label>
-          <select 
-            class="w-full border border-gray-300 rounded px-3 py-2"
-            :value="formData.fQualification"
-            @change="e => onChange('fQualification', e.target.value)"
-          >
-            <option value="">Select Qualification</option>
-            <option value="Completed up to Class 9">Completed up to Class 9</option>
-            <option value="SSC">SSC</option>
-            <option value="HSC">HSC</option>
-            <option value="Bachelor">Bachelor</option>
-            <option value="Masters">Masters</option>
-            <option value="PhD">PhD</option>
-          </select>
+          <CustomSelect
+            :model-value="formData.fQualification"
+            :options="qualificationOptions"
+            :placeholder="'Select Qualification'"
+            @update:modelValue="v => onChange('fQualification', v)"
+          />
         </div>
         
         <div>
@@ -143,63 +103,22 @@
         
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Mother's Occupation</label>
-          <select 
-            class="w-full border border-gray-300 rounded px-3 py-2"
-            :value="formData.mOccupation"
-            @change="e => onChange('mOccupation', e.target.value)"
-          >
-            <option value="">Select Occupation</option>
-            <option value="Engineer">Engineer</option>
-            <option value="Doctor">Doctor</option>
-            <option value="Banker">Banker</option>
-            <option value="Advocate">Advocate</option>
-            <option value="Farmer">Farmer</option>
-            <option value="Teacher">Teacher</option>
-            <option value="Professor">Professor</option>
-            <option value="Businessman">Businessman</option>
-            <option value="Entrepreneur">Entrepreneur</option>
-            <option value="Government Employee">Government Employee</option>
-            <option value="Private Job">Private Job</option>
-            <option value="Accountant">Accountant</option>
-            <option value="Shopkeeper">Shopkeeper</option>
-            <option value="Police Officer">Police Officer</option>
-            <option value="Army Personnel">Army Personnel</option>
-            <option value="Navy Personnel">Navy Personnel</option>
-            <option value="Air Force Personnel">Air Force Personnel</option>
-            <option value="Driver">Driver</option>
-            <option value="Electrician">Electrician</option>
-            <option value="Plumber">Plumber</option>
-            <option value="Mason">Mason</option>
-            <option value="Tailor">Tailor</option>
-            <option value="Carpenter">Carpenter</option>
-            <option value="Painter">Painter</option>
-            <option value="Day Laborer">Day Laborer</option>
-            <option value="Fisherman">Fisherman</option>
-            <option value="Mechanic">Mechanic</option>
-            <option value="IT Professional">IT Professional</option>
-            <option value="Software Engineer">Software Engineer</option>
-            <option value="Unemployed">Unemployed</option>
-            <option value="Retired">Retired</option>
-            <option value="Housewife">Housewife</option>
-            <option value="Other">Other</option>
-          </select>
+          <CustomSelect
+            :model-value="formData.mOccupation"
+            :options="motherOccupationOptions"
+            :placeholder="'Select Occupation'"
+            @update:modelValue="v => onChange('mOccupation', v)"
+          />
         </div>
         
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Mother's Qualification</label>
-          <select 
-            class="w-full border border-gray-300 rounded px-3 py-2"
-            :value="formData.mQualification"
-            @change="e => onChange('mQualification', e.target.value)"
-          >
-            <option value="">Select Qualification</option>
-            <option value="Completed up to Class 9">Completed up to Class 9</option>
-            <option value="SSC">SSC</option>
-            <option value="HSC">HSC</option>
-            <option value="Bachelor">Bachelor</option>
-            <option value="Masters">Masters</option>
-            <option value="PhD">PhD</option>
-          </select>
+          <CustomSelect
+            :model-value="formData.mQualification"
+            :options="qualificationOptions"
+            :placeholder="'Select Qualification'"
+            @update:modelValue="v => onChange('mQualification', v)"
+          />
         </div>
         
         <div>
@@ -228,6 +147,8 @@
 </template>
 
 <script setup>
+import CustomSelect from '../common/CustomSelect.vue';
+
 // Props
 const props = defineProps({
   formData: {
@@ -247,6 +168,18 @@ const props = defineProps({
     required: true
   }
 });
+
+const fatherOccupationOptions = [
+  'Engineer','Doctor','Banker','Advocate','Farmer','Teacher','Professor','Businessman','Entrepreneur','Government Employee','Private Job','Accountant','Shopkeeper','Police Officer','Army Personnel','Navy Personnel','Air Force Personnel','Driver','Electrician','Plumber','Mason','Tailor','Carpenter','Painter','Day Laborer','Fisherman','Mechanic','IT Professional','Software Engineer','Unemployed','Retired','Other'
+];
+
+const motherOccupationOptions = [
+  'Engineer','Doctor','Banker','Advocate','Farmer','Teacher','Professor','Businessman','Entrepreneur','Government Employee','Private Job','Accountant','Shopkeeper','Police Officer','Army Personnel','Navy Personnel','Air Force Personnel','Driver','Electrician','Plumber','Mason','Tailor','Carpenter','Painter','Day Laborer','Fisherman','Mechanic','IT Professional','Software Engineer','Unemployed','Retired','Housewife','Other'
+];
+
+const qualificationOptions = [
+  'Completed up to Class 9','SSC','HSC','Bachelor','Masters','PhD'
+];
 
 // Generic method for numeric only input
 const handleNumericOnly = (field, e) => {

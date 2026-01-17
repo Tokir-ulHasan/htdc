@@ -32,21 +32,12 @@
         
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Guardian Relation</label>
-          <select 
-            class="w-full border border-gray-300 rounded px-3 py-2"
-            :value="formData.gRelation"
-            @change="handleRelationChange"
-          >
-            <option value="">Select Relation</option>
-            <option value="Father">Father</option>
-            <option value="Mother">Mother</option>
-            <option value="Brother">Brother</option>
-            <option value="Sister">Sister</option>
-            <option value="Uncle">Uncle</option>
-            <option value="Aunt">Aunt</option>
-            <option value="Grandfather">Grandfather</option>
-            <option value="Grandmother">Grandmother</option>
-          </select>
+          <CustomSelect
+            :model-value="formData.gRelation"
+            :options="guardianRelationOptions"
+            :placeholder="'Select Relation'"
+            @update:modelValue="handleRelationSelect"
+          />
         </div>
         
         <div>
@@ -109,18 +100,12 @@
         
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Reference Relation</label>
-          <select 
-            class="w-full border border-gray-300 rounded px-3 py-2"
-            :value="formData.refRelation"
-            @change="e => onChange('refRelation', e.target.value)"
-          >
-            <option value="">Select Relation</option>
-            <option value="Friend">Friend</option>
-            <option value="Colleague">Colleague</option>
-            <option value="Neighbor">Neighbor</option>
-            <option value="Relative">Relative</option>
-            <option value="Other">Other</option>
-          </select>
+          <CustomSelect
+            :model-value="formData.refRelation"
+            :options="referenceRelationOptions"
+            :placeholder="'Select Relation'"
+            @update:modelValue="v => onChange('refRelation', v)"
+          />
         </div>
         
         <div>
@@ -158,6 +143,7 @@
 </template>
 
 <script setup>
+import CustomSelect from '../common/CustomSelect.vue';
 // Props
 const props = defineProps({
   formData: {
@@ -178,6 +164,9 @@ const props = defineProps({
   }
 });
 
+const guardianRelationOptions = ['Father','Mother','Brother','Sister','Uncle','Aunt','Grandfather','Grandmother'];
+const referenceRelationOptions = ['Friend','Colleague','Neighbor','Relative','Other'];
+
 // Method to handle guardian mobile number input (only 11 digits)
 const handleGuardianMobileInput = (e) => {
   let value = e.target.value.replace(/\D/g, ''); // Remove non-digit characters
@@ -196,9 +185,7 @@ const handleReferenceMobileInput = (e) => {
   props.onChange('refMobileNo', value);
 };
 
-// Method to handle relation change and auto-fill guardian info if relation is Father or Mother
-const handleRelationChange = (e) => {
-  const relation = e.target.value;
+const handleRelationSelect = (relation) => {
   props.onChange('gRelation', relation);
   
   // Auto-fill guardian info if relation is Father

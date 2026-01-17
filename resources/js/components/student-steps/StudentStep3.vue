@@ -29,82 +29,59 @@
       
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Gender <span class="text-red-500">*</span></label>
-        <select 
-          class="w-full border rounded px-3 py-2"
-          :class="formErrors.gender ? 'border-red-500' : 'border-gray-300'"
-          :value="formData.gender"
-          @change="e => onChange('gender', e.target.value)"
-        >
-          <option value="">Select Gender</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
+        <CustomSelect
+          :model-value="formData.gender"
+          :options="genderOptions"
+          :placeholder="'Select Gender'"
+          :error="!!formErrors.gender"
+          @update:modelValue="v => onChange('gender', v)"
+        />
         <p v-if="formErrors.gender" class="text-xs text-red-500 mt-1">{{ formErrors.gender }}</p>
       </div>
       
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Religion <span class="text-red-500">*</span></label>
-        <select 
-          class="w-full border rounded px-3 py-2"
-          :class="formErrors.religion ? 'border-red-500' : 'border-gray-300'"
-          :value="formData.religion"
-          @change="e => onChange('religion', e.target.value)"
-        >
-          <option value="">Select Religion</option>
-          <option value="Islam">Islam</option>
-          <option value="Hinduism">Hinduism</option>
-          <option value="Christianity">Christianity</option>
-          <option value="Buddhism">Buddhism</option>
-        </select>
+        <CustomSelect
+          :model-value="formData.religion"
+          :options="religionOptions"
+          :placeholder="'Select Religion'"
+          :error="!!formErrors.religion"
+          @update:modelValue="v => onChange('religion', v)"
+        />
         <p v-if="formErrors.religion" class="text-xs text-red-500 mt-1">{{ formErrors.religion }}</p>
       </div>
       
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Blood Group <span class="text-red-500">*</span></label>
-        <select 
-          class="w-full border rounded px-3 py-2"
-          :class="formErrors.bloodGroup ? 'border-red-500' : 'border-gray-300'"
-          :value="formData.bloodGroup"
-          @change="e => onChange('bloodGroup', e.target.value)"
-        >
-          <option value="">Select Blood Group</option>
-          <option value="A+">A+</option>
-          <option value="A-">A-</option>
-          <option value="B+">B+</option>
-          <option value="B-">B-</option>
-          <option value="AB+">AB+</option>
-          <option value="AB-">AB-</option>
-          <option value="O+">O+</option>
-          <option value="O-">O-</option>
-        </select>
+        <CustomSelect
+          :model-value="formData.bloodGroup"
+          :options="bloodGroupOptions"
+          :placeholder="'Select Blood Group'"
+          :error="!!formErrors.bloodGroup"
+          @update:modelValue="v => onChange('bloodGroup', v)"
+        />
         <p v-if="formErrors.bloodGroup" class="text-xs text-red-500 mt-1">{{ formErrors.bloodGroup }}</p>
       </div>
 
-         <div>
+      <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Nationality</label>
-        <select 
-          class="w-full border border-gray-300 rounded px-3 py-2"
-          :value="formData.nationality || 'Bangladeshi'"
-          @change="e => onChange('nationality', e.target.value)"
-        >
-          <option value="Bangladeshi">Bangladeshi</option>
-        </select>
+        <CustomSelect
+          :model-value="formData.nationality || 'Bangladeshi'"
+          :options="nationalityOptions"
+          :placeholder="'Select Nationality'"
+          @update:modelValue="v => onChange('nationality', v)"
+        />
       </div>
       
-         <div>
+      <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Marital Status <span class="text-red-500">*</span></label>
-        <select 
-          class="w-full border rounded px-3 py-2"
-          :class="formErrors.maritalStatus ? 'border-red-500' : 'border-gray-300'"
-          :value="formData.maritalStatus"
-          @change="e => onChange('maritalStatus', e.target.value)"
-        >
-          <option value="">Select Marital Status</option>
-          <option value="Single">Single</option>
-          <option value="Married">Married</option>
-          <option value="Divorced">Divorced</option>
-          <option value="Widowed">Widowed</option>
-        </select>
+        <CustomSelect
+          :model-value="formData.maritalStatus"
+          :options="maritalStatusOptions"
+          :placeholder="'Select Marital Status'"
+          :error="!!formErrors.maritalStatus"
+          @update:modelValue="v => onChange('maritalStatus', v)"
+        />
         <p v-if="formErrors.maritalStatus" class="text-xs text-red-500 mt-1">{{ formErrors.maritalStatus }}</p>
       </div>
       
@@ -210,6 +187,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import CustomSelect from '../common/CustomSelect.vue';
 
 // Props
 const props = defineProps({
@@ -230,6 +208,12 @@ const props = defineProps({
     required: true
   }
 });
+
+const genderOptions = ['Male', 'Female'];
+const religionOptions = ['Islam', 'Hinduism', 'Christianity', 'Buddhism'];
+const bloodGroupOptions = ['A+','A-','B+','B-','AB+','AB-','O+','O-'];
+const nationalityOptions = ['Bangladeshi'];
+const maritalStatusOptions = ['Single','Married','Divorced','Widowed'];
 
 // Method to handle mobile number input (only 11 digits)
 const handleMobileInput = (e) => {

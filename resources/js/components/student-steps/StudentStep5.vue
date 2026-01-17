@@ -42,73 +42,13 @@
         
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">District <span class="text-red-500">*</span></label>
-          <select 
-            class="w-full border rounded px-3 py-2"
-            :class="formErrors.presentAddressDist ? 'border-red-500' : 'border-gray-300'"
-            :value="formData.presentAddressDist"
-            @change="e => onChange('presentAddressDist', e.target.value)"
-          >
-            <option value="">Select District</option>
-            <option value="Dhaka">Dhaka</option>
-            <option value="Chittagong">Chittagong</option>
-            <option value="Comilla">Comilla</option>
-            <option value="Sylhet">Sylhet</option>
-            <option value="Rajshahi">Rajshahi</option>
-            <option value="Khulna">Khulna</option>
-            <option value="Barisal">Barisal</option>
-            <option value="Mymensingh">Mymensingh</option>
-            <option value="Rangpur">Rangpur</option>
-            <option value="Bogra">Bogra</option>
-            <option value="Pabna">Pabna</option>
-            <option value="Natore">Natore</option>
-            <option value="Joypurhat">Joypurhat</option>
-            <option value="Naogaon">Naogaon</option>
-            <option value="Chapainawabganj">Chapainawabganj</option>
-            <option value="Bagerhat">Bagerhat</option>
-            <option value="Jhenaidah">Jhenaidah</option>
-            <option value="Magura">Magura</option>
-            <option value="Meherpur">Meherpur</option>
-            <option value="Narail">Narail</option>
-            <option value="Kushtia">Kushtia</option>
-            <option value="Munshiganj">Munshiganj</option>
-            <option value="Gazipur">Gazipur</option>
-            <option value="Narsingdi">Narsingdi</option>
-            <option value="Shariatpur">Shariatpur</option>
-            <option value="Bandarban">Bandarban</option>
-            <option value="Rangamati">Rangamati</option>
-            <option value="Khagrachhari">Khagrachhari</option>
-            <option value="Cox's Bazar">Cox's Bazar</option>
-            <option value="Noakhali">Noakhali</option>
-            <option value="Feni">Feni</option>
-            <option value="Lakshmipur">Lakshmipur</option>
-            <option value="Chandpur">Chandpur</option>
-            <option value="Brahmanbaria">Brahmanbaria</option>
-            <option value="Kishoreganj">Kishoreganj</option>
-            <option value="Netrokona">Netrokona</option>
-            <option value="Sherpur">Sherpur</option>
-            <option value="Moulvibazar">Moulvibazar</option>
-            <option value="Habiganj">Habiganj</option>
-            <option value="Sunamganj">Sunamganj</option>
-            <option value="Pirojpur">Pirojpur</option>
-            <option value="Patuakhali">Patuakhali</option>
-            <option value="Bhola">Bhola</option>
-            <option value="Jhalokati">Jhalokati</option>
-            <option value="Satkhira">Satkhira</option>
-            <option value="Narayanganj">Narayanganj</option>
-            <option value="Faridpur">Faridpur</option>
-            <option value="Gopalganj">Gopalganj</option>
-            <option value="Madaripur">Madaripur</option>
-            <option value="Rajbari">Rajbari</option>
-            <option value="Tangail">Tangail</option>
-            <option value="Jamalpur">Jamalpur</option>
-            <option value="Gaibandha">Gaibandha</option>
-            <option value="Kurigram">Kurigram</option>
-            <option value="Lalmonirhat">Lalmonirhat</option>
-            <option value="Nilphamari">Nilphamari</option>
-            <option value="Panchagarh">Panchagarh</option>
-            <option value="Thakurgaon">Thakurgaon</option>
-            <option value="Dinajpur">Dinajpur</option>
-          </select>
+          <CustomSelect
+            :model-value="formData.presentAddressDist"
+            :options="districtOptions"
+            :placeholder="'Select District'"
+            :error="!!formErrors.presentAddressDist"
+            @update:modelValue="v => onChange('presentAddressDist', v)"
+          />
           <p v-if="formErrors.presentAddressDist" class="text-xs text-red-500 mt-1">{{ formErrors.presentAddressDist }}</p>
         </div>
       </div>
@@ -167,73 +107,13 @@
         
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">District <span class="text-red-500">*</span></label>
-          <select 
-            class="w-full border rounded px-3 py-2"
-            :class="formErrors.permanentAddressDist ? 'border-red-500' : 'border-gray-300'"
-            :value="formData.permanentAddressDist"
-            @change="e => onChange('permanentAddressDist', e.target.value)"
-          >
-            <option value="">Select District</option>
-            <option value="Dhaka">Dhaka</option>
-            <option value="Chittagong">Chittagong</option>
-            <option value="Comilla">Comilla</option>
-            <option value="Sylhet">Sylhet</option>
-            <option value="Rajshahi">Rajshahi</option>
-            <option value="Khulna">Khulna</option>
-            <option value="Barisal">Barisal</option>
-            <option value="Mymensingh">Mymensingh</option>
-            <option value="Rangpur">Rangpur</option>
-            <option value="Bogra">Bogra</option>
-            <option value="Pabna">Pabna</option>
-            <option value="Natore">Natore</option>
-            <option value="Joypurhat">Joypurhat</option>
-            <option value="Naogaon">Naogaon</option>
-            <option value="Chapainawabganj">Chapainawabganj</option>
-            <option value="Bagerhat">Bagerhat</option>
-            <option value="Jhenaidah">Jhenaidah</option>
-            <option value="Magura">Magura</option>
-            <option value="Meherpur">Meherpur</option>
-            <option value="Narail">Narail</option>
-            <option value="Kushtia">Kushtia</option>
-            <option value="Munshiganj">Munshiganj</option>
-            <option value="Gazipur">Gazipur</option>
-            <option value="Narsingdi">Narsingdi</option>
-            <option value="Shariatpur">Shariatpur</option>
-            <option value="Bandarban">Bandarban</option>
-            <option value="Rangamati">Rangamati</option>
-            <option value="Khagrachhari">Khagrachhari</option>
-            <option value="Cox's Bazar">Cox's Bazar</option>
-            <option value="Noakhali">Noakhali</option>
-            <option value="Feni">Feni</option>
-            <option value="Lakshmipur">Lakshmipur</option>
-            <option value="Chandpur">Chandpur</option>
-            <option value="Brahmanbaria">Brahmanbaria</option>
-            <option value="Kishoreganj">Kishoreganj</option>
-            <option value="Netrokona">Netrokona</option>
-            <option value="Sherpur">Sherpur</option>
-            <option value="Moulvibazar">Moulvibazar</option>
-            <option value="Habiganj">Habiganj</option>
-            <option value="Sunamganj">Sunamganj</option>
-            <option value="Pirojpur">Pirojpur</option>
-            <option value="Patuakhali">Patuakhali</option>
-            <option value="Bhola">Bhola</option>
-            <option value="Jhalokati">Jhalokati</option>
-            <option value="Satkhira">Satkhira</option>
-            <option value="Narayanganj">Narayanganj</option>
-            <option value="Faridpur">Faridpur</option>
-            <option value="Gopalganj">Gopalganj</option>
-            <option value="Madaripur">Madaripur</option>
-            <option value="Rajbari">Rajbari</option>
-            <option value="Tangail">Tangail</option>
-            <option value="Jamalpur">Jamalpur</option>
-            <option value="Gaibandha">Gaibandha</option>
-            <option value="Kurigram">Kurigram</option>
-            <option value="Lalmonirhat">Lalmonirhat</option>
-            <option value="Nilphamari">Nilphamari</option>
-            <option value="Panchagarh">Panchagarh</option>
-            <option value="Thakurgaon">Thakurgaon</option>
-            <option value="Dinajpur">Dinajpur</option>
-          </select>
+          <CustomSelect
+            :model-value="formData.permanentAddressDist"
+            :options="districtOptions"
+            :placeholder="'Select District'"
+            :error="!!formErrors.permanentAddressDist"
+            @update:modelValue="v => onChange('permanentAddressDist', v)"
+          />
           <p v-if="formErrors.permanentAddressDist" class="text-xs text-red-500 mt-1">{{ formErrors.permanentAddressDist }}</p>
         </div>
       </div>
@@ -242,6 +122,7 @@
 </template>
 
 <script setup>
+import CustomSelect from '../common/CustomSelect.vue';
 // Props
 const props = defineProps({
   formData: {
@@ -261,6 +142,10 @@ const props = defineProps({
     required: true
   }
 });
+
+const districtOptions = [
+  "Dhaka","Chittagong","Comilla","Sylhet","Rajshahi","Khulna","Barisal","Mymensingh","Rangpur","Bogra","Pabna","Natore","Joypurhat","Naogaon","Chapainawabganj","Bagerhat","Jhenaidah","Magura","Meherpur","Narail","Kushtia","Munshiganj","Gazipur","Narsingdi","Shariatpur","Bandarban","Rangamati","Khagrachhari","Cox's Bazar","Noakhali","Feni","Lakshmipur","Chandpur","Brahmanbaria","Kishoreganj","Netrokona","Sherpur","Moulvibazar","Habiganj","Sunamganj","Pirojpur","Patuakhali","Bhola","Jhalokati","Satkhira","Narayanganj","Faridpur","Gopalganj","Madaripur","Rajbari","Tangail","Jamalpur","Gaibandha","Kurigram","Lalmonirhat","Nilphamari","Panchagarh","Thakurgaon","Dinajpur"
+];
 
 // Method to copy present address to permanent address
 const copyPresentToPermanent = () => {

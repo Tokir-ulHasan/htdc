@@ -64,9 +64,9 @@ const displayedText = computed(() => {
 })
 
 function computePublicUrl(p) {
-  const parts = window.location.pathname.split('/');
-  const base = parts[1] ? `/${parts[1]}` : '';
-  return `${base}/public/${p}`;
+  const segments = window.location.pathname.split('/').filter(Boolean);
+  const base = segments[0] && segments[0].toLowerCase() === 'htdc' ? `/${segments[0]}` : '';
+  return `${base}/${p}`;
 }
 const handleTyping = () => {
   if (pause.value) return

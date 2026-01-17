@@ -197,242 +197,165 @@
         <!-- Fixed Compulsory Subjects based on selected group -->
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Compulsory Subject 1 <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100"
-            :class="{'border-red-500': !getFixedCompulsorySubject(1)}"
-            :value="getFixedCompulsorySubject(1)"
-            disabled
-          >
-            <option :value="getFixedCompulsorySubject(1)">{{ getFixedCompulsorySubject(1) }}</option>
-          </select>
+          <CustomSelect
+            :model-value="getFixedCompulsorySubject(1)"
+            :options="[getFixedCompulsorySubject(1)]"
+            :placeholder="'Subject'"
+            :disabled="true"
+          />
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Compulsory Subject 2 <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100"
-            :class="{'border-red-500': !getFixedCompulsorySubject(2)}"
-            :value="getFixedCompulsorySubject(2)"
-            disabled
-          >
-            <option :value="getFixedCompulsorySubject(2)">{{ getFixedCompulsorySubject(2) }}</option>
-          </select>
+          <CustomSelect
+            :model-value="getFixedCompulsorySubject(2)"
+            :options="[getFixedCompulsorySubject(2)]"
+            :placeholder="'Subject'"
+            :disabled="true"
+          />
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Compulsory Subject 3 <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100"
-            :class="{'border-red-500': !getFixedCompulsorySubject(3)}"
-            :value="getFixedCompulsorySubject(3)"
-            disabled
-          >
-            <option :value="getFixedCompulsorySubject(3)">{{ getFixedCompulsorySubject(3) }}</option>
-          </select>
+          <CustomSelect
+            :model-value="getFixedCompulsorySubject(3)"
+            :options="[getFixedCompulsorySubject(3)]"
+            :placeholder="'Subject'"
+            :disabled="true"
+          />
         </div>
         
         <!-- Elective and Optional Subjects with Group-Specific Logic -->
         <div v-if="getSelectedGroup() === 'Humanities'">
           <label class="block text-sm font-medium text-gray-700 mb-1">Elective Subject 1 (Status 0) <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2"
-            :class="{'border-red-500': !formData.elective1}"
-            :value="formData.elective1"
-            @change="handleElectiveChange('elective1', $event.target.value)"
-          >
-            <option value="">Select Subject</option>
-            <option 
-              v-for="subject in getElectiveSubjectByStatusForField(0, 'elective1')" 
-              :key="subject.id" 
-              :value="subject.name"
-            >
-              {{ subject.name }}
-            </option>
-          </select>
+          <CustomSelect
+            :model-value="formData.elective1"
+            :options="getElectiveSubjectByStatusForField(0, 'elective1').map(s => ({ label: s.name, value: s.name }))"
+            :placeholder="'Select Subject'"
+            :error="!formData.elective1"
+            @update:modelValue="v => handleElectiveChange('elective1', v)"
+          />
         </div>
         <div v-if="getSelectedGroup() === 'Humanities'">
           <label class="block text-sm font-medium text-gray-700 mb-1">Elective Subject 2 (Status 0) <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2"
-            :class="{'border-red-500': !formData.elective2}"
-            :value="formData.elective2"
-            @change="handleElectiveChange('elective2', $event.target.value)"
-          >
-            <option value="">Select Subject</option>
-            <option 
-              v-for="subject in getElectiveSubjectByStatusForField(0, 'elective2')" 
-              :key="subject.id" 
-              :value="subject.name"
-            >
-              {{ subject.name }}
-            </option>
-          </select>
+          <CustomSelect
+            :model-value="formData.elective2"
+            :options="getElectiveSubjectByStatusForField(0, 'elective2').map(s => ({ label: s.name, value: s.name }))"
+            :placeholder="'Select Subject'"
+            :error="!formData.elective2"
+            @update:modelValue="v => handleElectiveChange('elective2', v)"
+          />
         </div>
         <div v-if="getSelectedGroup() !== 'Science' && getSelectedGroup() !== 'Business Studies' && getSelectedGroup() !== 'Humanities'">
           <label class="block text-sm font-medium text-gray-700 mb-1">Elective Subject 1 (Status 4) <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2"
-            :class="{'border-red-500': !formData.elective1}"
-            :value="formData.elective1"
-            @change="handleElectiveChange('elective1', $event.target.value)"
-          >
-            <option value="">Select Subject</option>
-            <option 
-              v-for="subject in getElectiveSubjectByStatusForField(4, 'elective1')" 
-              :key="subject.id" 
-              :value="subject.name"
-              :disabled="isSubjectSelected(subject.name, ['elective1'])"
-            >
-              {{ subject.name }}
-            </option>
-          </select>
+          <CustomSelect
+            :model-value="formData.elective1"
+            :options="getElectiveSubjectByStatusForField(4, 'elective1').map(s => ({ label: s.name, value: s.name, disabled: isSubjectSelected(s.name, ['elective1']) }))"
+            :placeholder="'Select Subject'"
+            :error="!formData.elective1"
+            @update:modelValue="v => handleElectiveChange('elective1', v)"
+          />
         </div>
         <div v-if="getSelectedGroup() !== 'Science' && getSelectedGroup() !== 'Business Studies' && getSelectedGroup() !== 'Humanities'">
           <label class="block text-sm font-medium text-gray-700 mb-1">Elective Subject 2 (Status 5) <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2"
-            :class="{'border-red-500': !formData.elective2}"
-            :value="formData.elective2"
-            @change="handleElectiveChange('elective2', $event.target.value)"
-          >
-            <option value="">Select Subject</option>
-            <option 
-              v-for="subject in getElectiveSubjectByStatusForField(5, 'elective2')" 
-              :key="subject.id" 
-              :value="subject.name"
-              :disabled="isSubjectSelected(subject.name, ['elective2'])"
-            >
-              {{ subject.name }}
-            </option>
-          </select>
+          <CustomSelect
+            :model-value="formData.elective2"
+            :options="getElectiveSubjectByStatusForField(5, 'elective2').map(s => ({ label: s.name, value: s.name, disabled: isSubjectSelected(s.name, ['elective2']) }))"
+            :placeholder="'Select Subject'"
+            :error="!formData.elective2"
+            @update:modelValue="v => handleElectiveChange('elective2', v)"
+          />
         </div>
         <div v-if="getSelectedGroup() === 'Science'">
           <label class="block text-sm font-medium text-gray-700 mb-1">Elective Subject 1 (Fixed) <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100"
-            :class="{'border-red-500': !getFixedSubjectByStatusAndGroup(4)}"
-            :value="getFixedSubjectByStatusAndGroup(4)"
-            disabled
-          >
-            <option :value="getFixedSubjectByStatusAndGroup(4)">{{ getFixedSubjectByStatusAndGroup(4) }}</option>
-          </select>
+          <CustomSelect
+            :model-value="getFixedSubjectByStatusAndGroup(4)"
+            :options="[getFixedSubjectByStatusAndGroup(4)]"
+            :placeholder="'Subject'"
+            :disabled="true"
+          />
         </div>
         <div v-if="getSelectedGroup() === 'Science'">
           <label class="block text-sm font-medium text-gray-700 mb-1">Elective Subject 2 (Fixed) <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100"
-            :class="{'border-red-500': !getFixedSubjectByStatusAndGroup(5)}"
-            :value="getFixedSubjectByStatusAndGroup(5)"
-            disabled
-          >
-            <option :value="getFixedSubjectByStatusAndGroup(5)">{{ getFixedSubjectByStatusAndGroup(5) }}</option>
-          </select>
+          <CustomSelect
+            :model-value="getFixedSubjectByStatusAndGroup(5)"
+            :options="[getFixedSubjectByStatusAndGroup(5)]"
+            :placeholder="'Subject'"
+            :disabled="true"
+          />
         </div>
         <div v-if="getSelectedGroup() === 'Business Studies'">
           <label class="block text-sm font-medium text-gray-700 mb-1">Elective Subject 1 (Fixed) <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100"
-            :class="{'border-red-500': !getFixedSubjectByStatusAndGroup(4)}"
-            :value="getFixedSubjectByStatusAndGroup(4)"
-            disabled
-          >
-            <option :value="getFixedSubjectByStatusAndGroup(4)">{{ getFixedSubjectByStatusAndGroup(4) }}</option>
-          </select>
+          <CustomSelect
+            :model-value="getFixedSubjectByStatusAndGroup(4)"
+            :options="[getFixedSubjectByStatusAndGroup(4)]"
+            :placeholder="'Subject'"
+            :disabled="true"
+          />
         </div>
         <div v-if="getSelectedGroup() === 'Business Studies'">
           <label class="block text-sm font-medium text-gray-700 mb-1">Elective Subject 2 (Fixed) <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100"
-            :class="{'border-red-500': !getFixedSubjectByStatusAndGroup(5)}"
-            :value="getFixedSubjectByStatusAndGroup(5)"
-            disabled
-          >
-            <option :value="getFixedSubjectByStatusAndGroup(5)">{{ getFixedSubjectByStatusAndGroup(5) }}</option>
-          </select>
+          <CustomSelect
+            :model-value="getFixedSubjectByStatusAndGroup(5)"
+            :options="[getFixedSubjectByStatusAndGroup(5)]"
+            :placeholder="'Subject'"
+            :disabled="true"
+          />
         </div>
         <div v-if="getSelectedGroup() === 'Business Studies'">
           <label class="block text-sm font-medium text-gray-700 mb-1">Elective Subject 3 (Fixed) <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100"
-            :class="{'border-red-500': !getFixedSubjectByStatusAndGroup(6)}"
-            :value="getFixedSubjectByStatusAndGroup(6)"
-            disabled
-          >
-            <option :value="getFixedSubjectByStatusAndGroup(6)">{{ getFixedSubjectByStatusAndGroup(6) }}</option>
-          </select>
+          <CustomSelect
+            :model-value="getFixedSubjectByStatusAndGroup(6)"
+            :options="[getFixedSubjectByStatusAndGroup(6)]"
+            :placeholder="'Subject'"
+            :disabled="true"
+          />
         </div>
         <div v-if="getSelectedGroup() === 'Business Studies'">
           <label class="block text-sm font-medium text-gray-700 mb-1">Optional Subject (Fixed) <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100"
-            :class="{'border-red-500': !getFixedSubjectByStatusAndGroup(7)}"
-            :value="getFixedSubjectByStatusAndGroup(7)"
-            disabled
-          >
-            <option :value="getFixedSubjectByStatusAndGroup(7)">{{ getFixedSubjectByStatusAndGroup(7) }}</option>
-          </select>
+          <CustomSelect
+            :model-value="getFixedSubjectByStatusAndGroup(7)"
+            :options="[getFixedSubjectByStatusAndGroup(7)]"
+            :placeholder="'Subject'"
+            :disabled="true"
+          />
         </div>
         <div v-if="getSelectedGroup() === 'Humanities'">
           <label class="block text-sm font-medium text-gray-700 mb-1">Elective Subject 3 (Status 0) <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2"
-            :class="{'border-red-500': !formData.elective3}"
-            :value="formData.elective3"
-            @change="handleElectiveChange('elective3', $event.target.value)"
-          >
-            <option value="">Select Subject</option>
-            <option 
-              v-for="subject in getElectiveSubjectByStatusForField(0, 'elective3')" 
-              :key="subject.id" 
-              :value="subject.name"
-            >
-              {{ subject.name }}
-            </option>
-          </select>
+          <CustomSelect
+            :model-value="formData.elective3"
+            :options="getElectiveSubjectByStatusForField(0, 'elective3').map(s => ({ label: s.name, value: s.name }))"
+            :placeholder="'Select Subject'"
+            :error="!formData.elective3"
+            @update:modelValue="v => handleElectiveChange('elective3', v)"
+          />
         </div>
         <div v-if="getSelectedGroup() !== 'Business Studies' && getSelectedGroup() !== 'Humanities'">
           <label class="block text-sm font-medium text-gray-700 mb-1">Elective Subject 3 (Status 0) <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2"
-            :class="{'border-red-500': !formData.elective3}"
-            :value="formData.elective3"
-            @change="handleScienceElective3Change($event.target.value)"
-          >
-            <option value="">Select Subject</option>
-            <option 
-              v-for="subject in getElectiveSubjectByStatusForField(0, 'elective3')" 
-              :key="subject.id" 
-              :value="subject.name"
-            >
-              {{ subject.name }}
-            </option>
-          </select>
+          <CustomSelect
+            :model-value="formData.elective3"
+            :options="getElectiveSubjectByStatusForField(0, 'elective3').map(s => ({ label: s.name, value: s.name }))"
+            :placeholder="'Select Subject'"
+            :error="!formData.elective3"
+            @update:modelValue="v => handleScienceElective3Change(v)"
+          />
         </div>
         <div v-if="getSelectedGroup() === 'Humanities'">
           <label class="block text-sm font-medium text-gray-700 mb-1">Optional Subject (Status 0) <span class="text-red-500">*</span></label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2"
-            :class="{'border-red-500': !formData.optional}"
-            :value="formData.optional"
-            @change="handleElectiveChange('optional', $event.target.value)"
-          >
-            <option value="">Select Subject</option>
-            <option 
-              v-for="subject in getElectiveSubjectByStatusForField(0, 'optional')" 
-              :key="subject.id" 
-              :value="subject.name"
-            >
-              {{ subject.name }}
-            </option>
-          </select>
+          <CustomSelect
+            :model-value="formData.optional"
+            :options="getElectiveSubjectByStatusForField(0, 'optional').map(s => ({ label: s.name, value: s.name }))"
+            :placeholder="'Select Subject'"
+            :error="!formData.optional"
+            @update:modelValue="v => handleElectiveChange('optional', v)"
+          />
         </div>
         <div v-if="getSelectedGroup() !== 'Business Studies' && getSelectedGroup() !== 'Humanities'">
           <label class="block text-sm font-medium text-gray-700 mb-1">Optional Subject (Auto-selected)</label>
-          <select
-            class="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100"
-            :value="getScienceOptionalSubject()"
-            disabled
-          >
-            <option :value="getScienceOptionalSubject()">{{ getScienceOptionalSubject() }}</option>
-          </select>
+          <CustomSelect
+            :model-value="getScienceOptionalSubject()"
+            :options="[getScienceOptionalSubject()]"
+            :placeholder="'Subject'"
+            :disabled="true"
+          />
         </div>
       </div>
     </div>
@@ -441,6 +364,7 @@
 
 <script setup>
 import { computed, ref, onMounted, watch } from 'vue';
+import CustomSelect from '../common/CustomSelect.vue';
 
 // State for subjects and sessions
 const subjects = ref([]);
