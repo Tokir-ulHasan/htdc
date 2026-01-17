@@ -16,7 +16,7 @@
            Mobile: Full width (w-full).
            Medium (md) and up: 40% width (w-2/5). -->
       <section class="w-full md:w-2/5 bg-white p-6 rounded shadow">
-        <h1 class="text-2xl font-bold">Welcome to Hazera-Taju Degree College</h1>
+        <h1 class="text-2xl font-bold">Welcome sdfg to Hazera-Taju Degree College</h1>
         <div class="mt-2 text-slate-700">This is a starter site scaffolded per provided specifications. Use the sidebar to navigate pages.</div>
       </section>
     </div>
