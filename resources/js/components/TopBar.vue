@@ -136,8 +136,8 @@ onUnmounted(() => {
   background-color: transparent;
 }
 .topbar-bg-inner{
-background-image: radial-gradient(circle at center, rgb(0 87 67 / 83%) 0%, /* Start with a light, semi-transparent white in the center */ rgb(0 24 7 / 95%) 70%, /* Transition to the semi-transparent dark red */ rgb(0 24 7) 100% /* Hold the dark red color at the edges */);
-height: 100%;
+  background-image: radial-gradient(circle at center, rgba(0,87,67,0.83) 0%, rgba(0,24,7,0.95) 70%);
+  height: 100%;
 }
 
 
