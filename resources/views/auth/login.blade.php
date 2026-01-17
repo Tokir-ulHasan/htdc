@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin Login</title>
-    <link href="{{ asset('public' . mix('css/app.css')) }}" rel="stylesheet">
+    <meta name="base-url" content="{{ url('/') }}">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
     <div class="min-h-screen flex items-center justify-center">
@@ -28,6 +29,6 @@
             </form>
         </div>
     </div>
-    <script src="{{ asset('public' . mix('js/app.js')) }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

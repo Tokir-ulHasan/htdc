@@ -64,9 +64,12 @@ const displayedText = computed(() => {
 })
 
 function computePublicUrl(p) {
-  const segments = window.location.pathname.split('/').filter(Boolean);
-  const base = segments[0] && segments[0].toLowerCase() === 'htdc' ? `/${segments[0]}` : '';
-  return `${base}/${p}`;
+  if (!p) return '';
+  p = String(p).replace(/^\/+/, '');
+  const meta = document.querySelector('meta[name=\"base-url\"]');
+  const base = meta ? meta.getAttribute('content') || '' : '';
+  const normalizedBase = base.replace(/\/+$/, '');
+  return `${normalizedBase}/${p}`;
 }
 const handleTyping = () => {
   if (pause.value) return

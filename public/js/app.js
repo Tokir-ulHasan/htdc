@@ -27198,9 +27198,12 @@ var sloganText = 'A NON POLITICAL INSTITUE';
       }
     });
     function computePublicUrl(p) {
-      var segments = window.location.pathname.split('/').filter(Boolean);
-      var base = segments[0] && segments[0].toLowerCase() === 'htdc' ? "/".concat(segments[0]) : '';
-      return "".concat(base, "/").concat(p);
+      if (!p) return '';
+      p = String(p).replace(/^\/+/, '');
+      var meta = document.querySelector('meta[name=\"base-url\"]');
+      var base = meta ? meta.getAttribute('content') || '' : '';
+      var normalizedBase = base.replace(/\/+$/, '');
+      return "".concat(normalizedBase, "/").concat(p);
     }
     var _handleTyping = function handleTyping() {
       if (pause.value) return;
@@ -36277,7 +36280,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* Add any specific animations or fonts here */\n.topbar-bg[data-v-374685a9] {\r\n  background-size: 100% 350%;\r\n  background-repeat: no-repeat;\r\n  background-position: center ;\r\n  background-color: transparent;\n}\n.topbar-bg-inner[data-v-374685a9]{\r\nbackground-image: radial-gradient(circle at center, rgb(0 87 67 / 83%) 0%, /* Start with a light, semi-transparent white in the center */ rgb(0 24 7 / 95%) 70%, /* Transition to the semi-transparent dark red */ rgb(0 24 7) 100% /* Hold the dark red color at the edges */);\r\nheight: 100%;\n}\n.bn-text-stroke[data-v-374685a9] {\r\n    text-shadow: 1px 2px 0 #000, -2px 0 0 #000000, 2px 1px 0 #000, 3px -2px 0 #000;\n}\n.cursor[data-v-374685a9] {\r\n  animation: blink-374685a9 1s infinite;\r\n  \r\n  /* Make cursor bolder and bigger */\r\n  font-weight: bold;\r\n  font-size: 1.2em;\n}\n.cursor-blink[data-v-374685a9] {\r\n  animation: blink-374685a9 1s infinite;\n}\n@keyframes blink-374685a9 {\n0%, 100% {\r\n    opacity: 1;\n}\n50% {\r\n    opacity: 0;\n}\n}\r\n\r\n/* Ensure text remains white */\n@media (max-width: 767px) {\n.topbar-bg[data-v-374685a9] {\r\n    /* Slightly larger on mobile so it remains visible */\r\n    background-size: 80% auto;\r\n    background-repeat: no-repeat;\r\n    background-position: center center;\r\n    background-color: transparent;\n}\n.topbar-bg-inner[data-v-374685a9] {\r\n    justify-content: flex-start !important;\r\n    padding-left: 1rem;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* Add any specific animations or fonts here */\n.topbar-bg[data-v-374685a9] {\r\n  background-size: 100% 350%;\r\n  background-repeat: no-repeat;\r\n  background-position: center ;\r\n  background-color: transparent;\n}\n.topbar-bg-inner[data-v-374685a9]{\r\n  background-image: radial-gradient(circle at center, rgba(0,87,67,0.83) 0%, rgba(0,24,7,0.95) 70%);\r\n  height: 100%;\n}\n.bn-text-stroke[data-v-374685a9] {\r\n    text-shadow: 1px 2px 0 #000, -2px 0 0 #000000, 2px 1px 0 #000, 3px -2px 0 #000;\n}\n.cursor[data-v-374685a9] {\r\n  animation: blink-374685a9 1s infinite;\r\n  \r\n  /* Make cursor bolder and bigger */\r\n  font-weight: bold;\r\n  font-size: 1.2em;\n}\n.cursor-blink[data-v-374685a9] {\r\n  animation: blink-374685a9 1s infinite;\n}\n@keyframes blink-374685a9 {\n0%, 100% {\r\n    opacity: 1;\n}\n50% {\r\n    opacity: 0;\n}\n}\r\n\r\n/* Ensure text remains white */\n@media (max-width: 767px) {\n.topbar-bg[data-v-374685a9] {\r\n    /* Slightly larger on mobile so it remains visible */\r\n    background-size: 80% auto;\r\n    background-repeat: no-repeat;\r\n    background-position: center center;\r\n    background-color: transparent;\n}\n.topbar-bg-inner[data-v-374685a9] {\r\n    justify-content: flex-start !important;\r\n    padding-left: 1rem;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

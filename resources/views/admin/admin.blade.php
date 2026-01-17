@@ -11,8 +11,10 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+    <!-- Base URL for JS components -->
+    <meta name="base-url" content="{{ url('/') }}">
     <!-- Styles -->
-    <link href="{{ asset('public' . mix('css/app.css')) }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="font-sans antialiased">
     <div id="app">
@@ -22,7 +24,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('public' . mix('js/app.js')) }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
     @yield('scripts')
 </body>
 </html>

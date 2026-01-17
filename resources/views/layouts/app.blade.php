@@ -10,8 +10,10 @@
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
+    <!-- Base URL for JS components -->
+    <meta name="base-url" content="{{ url('/') }}">
     <!-- Styles -->
-    <link href="{{ asset('public' . mix('css/app.css')) }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <style>
 
         body {
@@ -28,6 +30,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('public' . mix('js/app.js')) }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

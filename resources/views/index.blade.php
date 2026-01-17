@@ -9,7 +9,7 @@
            Mobile: Full width (w-full).
            Medium (md) and up: 60% width (w-3/5). -->
       <section class="w-full md:w-3/5">
-        <slider :images='@json([asset("public/images/banner1.png"), asset("public/images/banner2.png"), asset("public/images/banner3.png")])'></slider>
+        <slider :images='@json([asset("images/banner1.png"), asset("images/banner2.png"), asset("images/banner3.png")])'></slider>
       </section>
 
       <!-- Section 2: Welcome 
