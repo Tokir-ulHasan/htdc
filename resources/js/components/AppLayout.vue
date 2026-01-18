@@ -30,7 +30,7 @@
 import { ref, onMounted } from 'vue';
 import TopBar from './TopBar.vue';
 import NavBar from './NavBar.vue';
-import SidebarComponent from './Sidebar.vue';
+import SidebarComponent from './SideBar.vue';
 import FooterComponent from './Footer.vue';
 
 const sidebar = ref(null);

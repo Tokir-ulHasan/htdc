@@ -6,7 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin Login</title>
     <meta name="base-url" content="{{ url('/') }}">
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <base href="{{ url('/') }}/">
+    <link href="{{ url(ltrim(mix('css/app.css'), '/')) }}" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
     <div class="min-h-screen flex items-center justify-center">
@@ -29,6 +30,6 @@
             </form>
         </div>
     </div>
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ url(ltrim(mix('js/app.js'), '/')) }}"></script>
 </body>
 </html>

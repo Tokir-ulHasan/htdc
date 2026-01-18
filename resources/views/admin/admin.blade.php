@@ -13,8 +13,9 @@
 
     <!-- Base URL for JS components -->
     <meta name="base-url" content="{{ url('/') }}">
+    <base href="{{ url('/') }}/">
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ url(ltrim(mix('css/app.css'), '/')) }}" rel="stylesheet">
 </head>
 <body class="font-sans antialiased">
     <div id="app">
@@ -24,7 +25,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ url(ltrim(mix('js/app.js'), '/')) }}"></script>
     @yield('scripts')
 </body>
 </html>

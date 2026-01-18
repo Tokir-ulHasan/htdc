@@ -19,7 +19,7 @@ import ExampleComponent from './components/ExampleComponent.vue';
 import Header from './components/Header.vue';
 import TopBar from './components/TopBar.vue';
 import NavBar from './components/NavBar.vue';
-import Sidebar from './components/Sidebar.vue';
+import Sidebar from './components/SideBar.vue';
 import Footer from './components/Footer.vue';
 import AppLayout from './components/AppLayout.vue';
 import Slider from './components/Slider.vue';

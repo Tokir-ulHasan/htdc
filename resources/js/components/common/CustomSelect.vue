@@ -35,7 +35,7 @@
           class="px-3 py-2 cursor-pointer"
           :class="[
             opt.disabled ? 'opacity-50 cursor-not-allowed' : '',
-            (hoverIndex === i || modelValue === opt.value) ? 'bg-ddPrimary-100 text-white' : 'bg-white text-black'
+            (hoverIndex === i || modelValue === opt.value) ? 'bg-red-500 text-white' : 'bg-white text-black'
           ]"
         >
           {{ opt.label }}

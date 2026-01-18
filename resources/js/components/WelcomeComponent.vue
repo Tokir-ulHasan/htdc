@@ -26,7 +26,7 @@ import { ref, onMounted } from 'vue';
 import Slider from './Slider.vue';
 
 // Data
-const banners = ref(['/images/banner1.png', '/images/banner2.png', '/images/banner3.png']);
+const banners = ref(['images/banner1.png', 'images/banner2.png', 'images/banner3.png']);
 const welcomeText = ref('Welcome to Hazera-Taju Degree College');
 const welcomeContent = ref('This is a starter site scaffolded per provided specifications. Use the sidebar to navigate pages.');
 

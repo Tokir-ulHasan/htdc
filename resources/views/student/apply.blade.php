@@ -6,5 +6,3 @@
     <student-multi-step-form :initial-pincode="'{{ request()->pincode ?? '' }}'"></student-multi-step-form>
 </div>
 @endsection
-
-

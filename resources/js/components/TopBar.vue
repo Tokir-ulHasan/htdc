@@ -1,10 +1,10 @@
 <template>
   <!-- Tailwind CSS classes used in this component: text-red-500, bg-green-900, text-white -->
-  <div class="topbar-bg text-white relative " :style="{ backgroundImage: `url('${computePublicUrl('images/Bannerbuilding.jpeg')}')` }">
+  <div class="topbar-bg text-white relative " :style="{ backgroundImage: `url('${computeAssetUrl('images/Bannerbuilding.jpeg')}')` }">
     <!-- center column: logo + title centered -->
     <div class="topbar-bg-inner flex items-center sm:justify-start md:justify-center  gap-6 sm:items-start pb-2 pt-3">
         <img 
-        :src="computePublicUrl('images/logo.svg')" 
+        :src="computeAssetUrl('images/logo.svg')" 
         alt="Hazera-Taju logo" 
         class="h-14 w-14 md:h-32 md:w-36 lg:h-32 lg:w-36" 
         />
@@ -63,13 +63,15 @@ const displayedText = computed(() => {
   }
 })
 
-function computePublicUrl(p) {
+function computeAssetUrl(p) {
   if (!p) return '';
-  p = String(p).replace(/^\/+/, '');
+  const path = String(p).replace(/^\/+/, '');
   const meta = document.querySelector('meta[name=\"base-url\"]');
-  const base = meta ? meta.getAttribute('content') || '' : '';
+  const base = meta ? meta.getAttribute('content') || window.location.origin : window.location.origin;
   const normalizedBase = base.replace(/\/+$/, '');
-  return `${normalizedBase}/${p}`;
+  const needsPublic = window.location.pathname.includes('/index.php');
+  const prefix = needsPublic ? 'public/' : '';
+  return `${normalizedBase}/${prefix}${path}`;
 }
 const handleTyping = () => {
   if (pause.value) return

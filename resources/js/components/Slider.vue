@@ -97,8 +97,28 @@ let intervalId = null;
 const hasImages = computed(() => props.images && props.images.length > 0);
 
 // Methods
+const computePublicUrl = (p) => {
+  if (!p) return '';
+  let path = String(p).replace(/^\/+/, '');
+  // If absolute URL or data URL, return as-is
+  if (/^(https?:)?\/\//i.test(p) || /^data:/i.test(p)) return p;
+  const needsPublic = window.location.pathname.includes('/index.php');
+  if (needsPublic && !/^public\//.test(path)) {
+    path = `public/${path}`;
+  }
+  try {
+    return new URL(path, document.baseURI).href;
+  } catch {
+    const meta = document.querySelector('meta[name="base-url"]');
+    const base = meta ? meta.getAttribute('content') || '' : '';
+    const normalizedBase = base.replace(/\/+$/, '');
+    return `${normalizedBase}/${path}`;
+  }
+};
+
 const getImageSrc = (item) => {
-  return typeof item === 'string' ? item : item.image;
+  const src = typeof item === 'string' ? item : item.image;
+  return computePublicUrl(src);
 };
 
 const getImageTitle = (item) => {

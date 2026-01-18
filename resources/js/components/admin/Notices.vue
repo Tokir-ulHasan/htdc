@@ -83,9 +83,15 @@ export default {
       await this.fetchNotices();
     },
     computeImageUrl(path) {
-      const parts = window.location.pathname.split('/');
-      const base = parts[1] ? `/${parts[1]}` : '';
-      return `${base}/public/${path}`;
+      const p = String(path || '').replace(/^\/+/, '');
+      try {
+        return new URL(p, document.baseURI).href;
+      } catch {
+        const meta = document.querySelector('meta[name="base-url"]');
+        const base = meta ? meta.getAttribute('content') || '' : '';
+        const normalizedBase = base.replace(/\/+$/, '');
+        return `${normalizedBase}/${p}`;
+      }
     }
   }
 };

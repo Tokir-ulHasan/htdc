@@ -3,38 +3,51 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Program <span class="text-red-500">*</span></label>
-        <CustomSelect
-          :model-value="formData.program"
-          :options="programOptions"
-          :placeholder="'Select Program'"
-          :error="!!formErrors.program"
-          @update:modelValue="v => handleProgramChange({ target: { value: v }})"
-        />
+        <select 
+          class="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-red-500 focus:border-red-500"
+          :class="formErrors.program ? 'border-red-500' : 'border-gray-300'"
+          :value="formData.program"
+          @change="handleProgramChange"
+        >
+          <option value="">Select Program</option>
+          <option v-for="program in programs" :key="program.id" :value="program.name">
+            {{ program.name }}
+          </option>
+        </select>
         <p v-if="formErrors.program" class="text-xs text-red-500 mt-1">{{ formErrors.program }}</p>
       </div>
       
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Group <span class="text-red-500">*</span></label>
-        <CustomSelect
-          :model-value="formData.group"
-          :options="groupOptions"
-          :placeholder="'Select Group'"
+        <select 
+          class="w-full border rounded px-3 py-2 border-ddPrimary-400 focus:ring-2 focus:ring-red-500 focus:border-red-500"
+          :class="formErrors.group ? 'border-red-500' : 'border-ddPrimary-400'"
+          :value="formData.group"
+          @change="e => onChange('group', e.target.value)"
           :disabled="!formData.program"
-          :error="!!formErrors.group"
-          @update:modelValue="v => onChange('group', v)"
-        />
+        >
+          <option value="">Select Group</option>
+          <option
+          v-for="group in filteredGroups" :key="group.id" :value="group.name">
+            {{ group.name }}
+          </option>
+        </select>
         <p v-if="formErrors.group" class="text-xs text-red-500 mt-1">{{ formErrors.group }}</p>
       </div>
       
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Session <span class="text-red-500">*</span></label>
-        <CustomSelect
-          :model-value="formData.session"
-          :options="sessionOptions"
-          :placeholder="'Select Session'"
-          :error="!!formErrors.session"
-          @update:modelValue="v => onChange('session', v)"
-        />
+        <select 
+          class="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-red-500 focus:border-red-500"
+          :class="formErrors.session ? 'border-red-500' : 'border-gray-300'"
+          :value="formData.session"
+          @change="e => onChange('session', e.target.value)"
+        >
+          <option value="">Select Session</option>
+          <option v-for="session in sessions" :key="session.session" :value="session.session">
+            {{ session.session }}
+          </option>
+        </select>
         <p v-if="formErrors.session" class="text-xs text-red-500 mt-1">{{ formErrors.session }}</p>
       </div>
     </div>
@@ -43,7 +56,6 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import CustomSelect from '../common/CustomSelect.vue';
 
 // Props
 const props = defineProps({
@@ -84,14 +96,11 @@ const filteredGroups = computed(() => {
   return groups.value.filter(g => g.programId === programId);
 });
 
-const groupOptions = computed(() => filteredGroups.value.map(g => ({ label: g.name, value: g.name })));
-const programOptions = computed(() => programs.value.map(p => p.name));
-const sessionOptions = computed(() => sessions.value.map(s => s.session));
 // Fetch data from API
 onMounted(async () => {
   try {
-    const segments = window.location.pathname.split('/').filter(Boolean);
-    const base = segments[0] && segments[0].toLowerCase() === 'htdc' ? `/${segments[0]}` : '';
+    const parts = window.location.pathname.split('/');
+    const base = parts[1] ? `/${parts[1]}` : '';
     const apiBase = `${base}/api`;
     const [programsRes, groupsRes, sessionsRes] = await Promise.all([
       fetch(`${apiBase}/programs`),
@@ -117,32 +126,33 @@ const handleProgramChange = (event) => {
 </script>
 
 <style scoped>
-/* Basic styling for the select box */
-  select {
-    padding: 10px;
-    font-size: 16px;
-    width: 200px;
-  }
+/* Custom styling for select elements */
+select {
+  transition: all 0.2s ease;
+}
 
-  /* Styling the option groups */
-  optgroup {
-    font-weight: bold;
-    font-style: italic;
-  }
+/* Focus state styling */
+select:focus {
+  outline: none;
+}
 
-  /* NOTE: Browser support for hover on <option> is limited. 
-     This works best in Firefox/Chrome for specific attributes.
-  */
-  option:hover, 
-  option:focus, 
-  option:checked {
-    background-color: rgb(13, 255, 0) !important;
-    color: white !important;
-  }
+/* For Firefox - supports more select option styling */
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
 
-  /* Class applied via JS when an option is selected */
-  .selected-option {
-    background-color: rgb(0, 255, 145) !important;
-    color: white !important;
-  }
+/* Styling for option hover and selected states */
+select option:hover,
+select option:checked,
+select option:focus {
+  background-color: #ef4444 !important; /* Tailwind red-500 */
+  color: white;
+}
+
+/* For better option hover effect in supported browsers */
+select:focus option:hover {
+  background-color: #ef4444 !important; /* Tailwind red-500 */
+  color: white;
+}
 </style>

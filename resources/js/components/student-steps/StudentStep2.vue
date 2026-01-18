@@ -53,13 +53,30 @@ const props = defineProps({
 const programs = ref([]);
 const loading = ref(true);
 
+function computePublicUrl(p) {
+  if (!p) return '';
+  let path = String(p).replace(/^\/+/, '');
+  const needsPublic = window.location.pathname.includes('/index.php');
+  if (needsPublic && !/^public\//.test(path)) {
+    path = `public/${path}`;
+  }
+  try {
+    return new URL(path, document.baseURI).href;
+  } catch {
+    const meta = document.querySelector('meta[name="base-url"]');
+    const base = meta ? meta.getAttribute('content') || '' : '';
+    const normalizedBase = base.replace(/\/+$/, '');
+    return `${normalizedBase}/${path}`;
+  }
+}
+
 const currentProgramImage = computed(() => {
   if (!programs.value.length || !props.formData.program) {
-    return '/images/terms/hscTerms.png'; // Default fallback
+    return computePublicUrl('images/terms/hscTerms.png');
   }
   
   const program = programs.value.find(p => p.name === props.formData.program);
-  return program ? program.termsImage : '/images/terms/hscTerms.png';
+  return program ? program.termsImage : computePublicUrl('images/terms/hscTerms.png');
 });
 
 onMounted(async () => {

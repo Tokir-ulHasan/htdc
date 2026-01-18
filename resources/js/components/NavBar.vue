@@ -104,7 +104,7 @@ const dropdowns = {
     }
   ],
   'E-SERVICES': [
-    { label: "Online Admission", href: "/apply" },
+    { label: "Online Admission", href: computePublicUrl('student/apply') },
     { label: "HSC", href: "#" },
     { label: "Honours", href: "#" },
     { label: "Degree", href: "#" },
@@ -132,13 +132,25 @@ const toggleSidebar = () => {
   }
 };
 
+const computePublicUrl = (p) => {
+  const path = String(p || '').replace(/^\/+/, '');
+  try {
+    return new URL(path || '', document.baseURI).href;
+  } catch {
+    const meta = document.querySelector('meta[name="base-url"]');
+    const base = meta ? meta.getAttribute('content') || '' : '';
+    const normalizedBase = base.replace(/\/+$/, '');
+    return path ? `${normalizedBase}/${path}` : `${normalizedBase}/`;
+  }
+};
+
 const hrefFor = (label) => {
   const key = label.toLowerCase();
-  if(key === 'home') return '/' 
-  if(key === 'form download') return '/form-download'
-  if(key === 'contact') return '/contact'
-  if(key === 'photo gallary') return '/gallery'
-  if(key === 'notice') return '/notice'
-  return '#'
+  if (key === 'home') return computePublicUrl('');
+  if (key === 'form download') return computePublicUrl('form-download');
+  if (key === 'contact') return computePublicUrl('contact');
+  if (key === 'photo gallary') return computePublicUrl('gallery');
+  if (key === 'notice') return computePublicUrl('notice');
+  return '#';
 };
 </script>
